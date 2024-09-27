@@ -23,7 +23,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   background("#1a0633");
 
-  video = createCapture(VIDEO);
+  video = createCapture(VIDEO,{ flipped:true });
   video.size(640, 480);
   video.hide();
   handPose.detectStart(video, gotHands);
@@ -42,8 +42,9 @@ function draw() {
     let thumb = hands[0].thumb_tip;
     pinch = dist(finger.x, finger.y, thumb.x, thumb.y);
     
-    pinchPosition.x = map((finger.x + thumb.x) / 2, 0, video.width, 0, width);
-    pinchPosition.y = map((finger.y + thumb.y) / 2, 0, video.height, 0, height);
+    pinchPosition.x = map((finger.x + thumb.x) / 2, video.width, 0, 0, width);
+pinchPosition.y = map((finger.y + thumb.y) / 2, 0, video.height, 0, height);
+
   }
 
   if (startAnimation) {
